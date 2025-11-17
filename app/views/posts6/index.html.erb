@@ -1,0 +1,13 @@
+<posts-list>
+  <section id="posts">
+    <%= render @posts %>
+  </section>
+  
+  <% if @pagy.next %>
+    <%= turbo_frame_tag "pagination", 
+        src: posts6_index_path(page: @pagy.next),
+        loading: "lazy" do %>
+      Loading more...
+    <% end %>
+  <% end %>
+</posts-list>

@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "pagination" do %>
+  <%= render posts %>
+  
+  <% if pagy.next %>
+    <%= turbo_frame_tag "pagination", 
+        src: posts6_index_path(page: pagy.next),
+        loading: "lazy" do %>
+      Loading more...
+    <% end %>
+  <% end %>
+<% end %>

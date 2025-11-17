@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :posts3
   resources :posts4
   resources :posts5
-  root "posts#index"
+  resources :posts6
+  root "posts6#index"
 end
