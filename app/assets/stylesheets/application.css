@@ -1,32 +1,10 @@
-@import url('_styles.css');
-@import url('_color-schemes.css');
-@import url('_document.css');
-@import url('_accessibility-user-interaction.css');
-@import url('_accordion-details.css');
-@import url('_basics-form-elements.css');
-@import url('_button.css');
-@import url('_card-article.css');
-@import url('_checkboxes-radios-and-switches.css');
-@import url('_code.css');
-@import url('_embedded-content.css');
-@import url('_figure.css');
-@import url('_group-rolegroup-rolesearch.css');
-@import url('_input-type-color.css');
-@import url('_input-type-datetime.css');
-@import url('_input-type-file.css');
-@import url('_input-type-range.css');
-@import url('_input-type-search.css');
-@import url('_landmarks.css');
-@import url('_link.css');
-@import url('_loading-aria-busytrue.css');
-@import url('_miscs.css');
-@import url('_modal-dialog.css');
-@import url('_nav.css');
-@import url('_progress.css');
-@import url('_reduce-motion-features.css');
-@import url('_section.css');
-@import url('_table.css');
-@import url('_tooltip-data-tooltip.css');
-@import url('_typography.css');
-@import url('_menu.css');
-@import url('_form.css');
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */

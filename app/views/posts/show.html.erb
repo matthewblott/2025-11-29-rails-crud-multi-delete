@@ -5,8 +5,18 @@
 <%= turbo_stream_from @post %>
 
 <controls>
-  <%= link_to "Edit", edit_post_path(@post), role: "button" %>
-  <%= link_to "Back", posts_path, role: "button" %>
+  <%= link_to :Edit, edit_post_path(@post) %>
+  <%= link_to :Back, posts_path %>
+  <%= button_to "Delete",
+    post_path(@post),
+    method: :delete, # Remove to use turbo 
+    data: {
+      turbo: false,
+      turbo_method: :delete, # Only used with turbo
+      turbo_confirm: "Are you sure?" # Only used with turbo
+    }
+  %>
+
 </controls>
 
 <%= render "form", disabled: true %>

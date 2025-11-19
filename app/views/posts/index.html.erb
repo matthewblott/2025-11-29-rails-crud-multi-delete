@@ -1,16 +1,19 @@
-<h1>Posts</h1>
+<%= turbo_stream_from :posts_after_create_stream %>
 
 <controls>
-  <%= link_to "New", new_post_path(@post), role: "button" %>
+  <%= link_to :New, new_post_path(@post) %>
 </controls>
 
-<%= turbo_frame_tag :foo do %>
-  <% @posts.each do |post| %>
-    <%= render "post", post: post %>
-  <% end %>
-<% end %>
+<hr>
 
-<%= turbo_frame_tag :frame_identifier, 
-  loading: :lazy,
-  src: posts_path(format: :turbo_stream, page: @pagy.next)
-%>
+<section id="posts_element">
+  <%= render @posts %>
+  
+  <% if @pagy.next %>
+    <%= turbo_frame_tag :pagination, 
+        src: posts_path(page: @pagy.next),
+        loading: "lazy" do %>
+      Loading more...
+    <% end %>
+  <% end %>
+</section>

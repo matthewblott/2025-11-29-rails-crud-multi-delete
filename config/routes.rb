@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
+  resources :simpler
+
   resources :posts
-  resources :posts2
-  resources :posts3
-  resources :posts4
-  resources :posts5
-  resources :posts6
-  root "posts6#index"
+  root "posts#index"
 end

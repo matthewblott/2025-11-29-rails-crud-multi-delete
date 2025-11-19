@@ -1,6 +1,6 @@
-<%= form_with(model: @post, id: 'post_form') do |form| %>
+<%= form_with(model: @post, id: :post_form) do |form| %>
 
-  <fieldset <%= 'disabled' if disabled %>>
+  <fieldset <%= :disabled if disabled %>>
 
   <% if @post.errors.any? %>
     <div style="color: red">
@@ -27,3 +27,4 @@
   </fieldset>
 
 <% end %>
+

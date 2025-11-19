@@ -1,8 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-
+  
   def index
-    @pagy, @posts = pagy_countless(Post.all, items: 10)
+    @pagy, @posts = pagy(Post.order(created_at: :desc), items: 10)
+    
+    if turbo_frame_request?
+      render partial: "posts/posts_frame", locals: { post_view_models: @posts, pagy: @pagy }
+    end
   end
 
   def new
@@ -11,40 +15,32 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-
-    respond_to do |format|
-      if @post.save
-        redirect_to post_url(@post), notice: "Post was successfully created."
-      else
-        render :new, status: :unprocessable_entity
-      end
+    if @post.save
+      redirect_to @post, notice: "Post was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        redirect_to post_url(@post), notice: "Post was successfully updated."
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    if @post.update(post_params)
+      redirect_to @post, notice: "Post was successfully updated.", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @post.destroy
-
-    respond_to do |format|
-      redirect_to posts_url, notice: "Post was successfully destroyed."
-    end
+    @post.destroy!
+    redirect_to posts_path, notice: "Post was successfully destroyed.", status: :see_other
   end
 
   private
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find(params.expect(:id))
     end
 
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.expect(post: [ :title, :body ])
     end
 end

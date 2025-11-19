@@ -1,6 +1,0 @@
-<% if @pagy.next %>
-  <%= turbo_frame_tag "pagination", 
-      src: posts6_path(page: @pagy.next),
-      loading: "lazy" do %>
-  <% end %>
-<% end %>
