@@ -1,5 +1,7 @@
-<%= turbo_stream.append :posts_element do %>
-  <%= render @posts %>
+<%= turbo_stream.append "posts_element" do %>
+  <% @posts.each do |post| %>
+    <%= render partial: "simpler/post", locals: { post: post } %>
+  <% end %>
 <% end %>
 
 <%= turbo_stream.replace :frame_identifier do %>
