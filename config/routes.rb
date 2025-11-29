@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   resources :simpler
 
   resources :posts
-  root "posts#index"
+  root "simpler#index"
 end

@@ -1,9 +1,15 @@
 <%= turbo_stream_from :posts_after_create_stream %>
 
 <section id="posts_element">
-  <% @posts.each do |post| %>
-    <%= render partial: "simpler/post", locals: { post: post } %>
-  <% end %>
+  <div data-controller="posts">
+    <button data-posts-target="delete">
+      Delete
+    </button>
+
+    <% @posts.each do |post| %>
+      <%= render partial: "simpler/post", locals: { post: post } %>
+    <% end %>
+  </div>
 
   <% if @pagy.next %>
     <%= turbo_frame_tag :pagination, 

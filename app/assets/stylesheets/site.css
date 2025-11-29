@@ -1,0 +1,11 @@
+/* @layer layout */
+/* @import url('./layout.css') layer(layout); */
+
+.selected {
+  background-color: lightyellow;
+}
+
+[id^="post_"] {
+  cursor: pointer;  
+  cursor: default;  
+}
