@@ -10,10 +10,15 @@ class SimplerController < ApplicationController
   end
 
   def destroy_multiple
-    # debugger
-
+    @deleted_ids = Array(params[:ids])
     Post.where(id: params[:ids]).destroy_all
-    redirect_to simpler_index_path, notice: "Deleted"
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to simpler_index_path, notice: "Deleted" }
+    end
+
   end
+
 
 end
