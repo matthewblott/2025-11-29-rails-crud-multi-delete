@@ -13,3 +13,7 @@ gem "solid_cable"
 
 gem "pagy", "~> 43.0"
 gem "faker", "~> 3.5"
+
+group :development, :test do
+  gem 'debug', platforms: %i[ mri ] 
+end

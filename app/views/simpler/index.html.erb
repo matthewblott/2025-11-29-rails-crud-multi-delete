@@ -1,10 +1,17 @@
 <%= turbo_stream_from :posts_after_create_stream %>
 
 <section id="posts_element">
-  <div data-controller="posts">
-    <button data-posts-target="delete">
+  <div data-controller="posts" data-posts-target="controller">
+
+    <%= button_tag "Select all",
+      data: {
+        action: 'posts#toggleSelection'
+      }
+    %>
+
+    <%= button_to simpler_index_path, data: { posts_target: "delete" }, method: :delete do %>
       Delete
-    </button>
+    <% end %>
 
     <% @posts.each do |post| %>
       <%= render partial: "simpler/post", locals: { post: post } %>
