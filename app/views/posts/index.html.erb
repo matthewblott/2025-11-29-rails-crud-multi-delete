@@ -10,14 +10,15 @@
       }
     %>
 
-  <%= button_tag "Delete",
-    id: "delete-button",
-    type: "submit",
-    data: {
-      action: "posts#bulkDelete",
-      posts_target: "deleteButton"
-    },
-    form: "delete-form" %>
+    <%= button_tag "Delete",
+      id: "delete-button",
+      type: "submit",
+      data: {
+        action: "posts#bulkDelete",
+        posts_target: "deleteButton"
+      },
+      form: "delete-form"
+    %>
 
     <%= link_to :New, new_post_path(@post) %>
 
