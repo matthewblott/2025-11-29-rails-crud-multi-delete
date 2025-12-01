@@ -65,7 +65,6 @@ export default class extends Controller {
     input.value = id
     input.dataset.idValue = id  // helps us find/remove it later
     this.deleteFormTarget.appendChild(input)
-    // this.deleteButtonTarget.appendChild(input)
   }
 
   remove(id) {
