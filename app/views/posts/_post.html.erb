@@ -1,6 +1,6 @@
-<div id="<%= dom_id post %>">
+<div id="<%= dom_id post %>" data-action="click->posts#select">
   <div>
-    <%= link_to post.title, post_path(post) %>
+    <%= post.title %>
   </div>
   <div>
     <%= post.body %>

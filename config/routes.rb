@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
-  resources :simpler do
+  resources :posts do
     delete '/', action: :destroy_multiple, on: :collection
   end
 
-  resources :posts
+  # resources :posts
 
-  root "simpler#index"
+  root "posts#index"
 end

@@ -1,0 +1,28 @@
+<% @deleted_ids.each do |id| %>
+  <%= turbo_stream.remove "post_#{id}" %>
+<% end %>
+
+<%#= turbo_stream.replace "delete-button" do %>
+  <%#= button_tag "Delete",
+    id: "delete-button",
+    type: "submit",
+    disabled: true,
+    data: {
+      posts_target: "deleteButton"
+    },
+    form: "delete-form" %>
+<% #end %>
+
+<%= turbo_stream.replace "delete-form" do %>
+
+  <%= tag.form id: "delete-form",
+    action: posts_path,
+    method: "post",
+    data: {
+      posts_target: 'deleteForm'
+    } do %>
+
+    <%= hidden_field_tag :_method, :delete %>
+  <% end %>
+
+<% end %>

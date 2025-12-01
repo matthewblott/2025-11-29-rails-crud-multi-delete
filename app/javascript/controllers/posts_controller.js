@@ -2,15 +2,20 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   
-  static targets = ['delete', 'controller']
+  static targets = ['controller', 'deleteForm', 'deleteButton']
 
   connect() {
     this.ids = []
-    this.deleteTarget.disabled = true
+    this.deleteButtonTarget.disabled = true
     this.allSelected = false
   }
 
   getNumber = (id) => id.match(/(?<=post_)\d+/)[0]
+
+  bulkDelete(e) {
+    e.preventDefault()
+    this.deleteFormTarget.submit()
+  }
 
   toggleSelection(e) {
     const posts = this.controllerTarget.querySelectorAll('div[id^="post_"]')
@@ -59,11 +64,12 @@ export default class extends Controller {
     input.name = "ids[]"
     input.value = id
     input.dataset.idValue = id  // helps us find/remove it later
-    this.deleteTarget.appendChild(input)
+    this.deleteFormTarget.appendChild(input)
+    // this.deleteButtonTarget.appendChild(input)
   }
 
   remove(id) {
-    const input = this.deleteTarget.querySelector(`[data-id-value="${id}"]`)
+    const input = this.deleteButtonTarget.querySelector(`[data-id-value="${id}"]`)
     if (input){
       input.remove()
     }
@@ -74,7 +80,7 @@ export default class extends Controller {
     
     if (this.deleteDisabled !== shouldDisable) {
       this.deleteDisabled = shouldDisable
-      this.deleteTarget.disabled = shouldDisable
+      this.deleteButtonTarget.disabled = shouldDisable
     }
 
   }

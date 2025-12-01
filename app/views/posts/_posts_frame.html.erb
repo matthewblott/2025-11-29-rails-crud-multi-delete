@@ -1,6 +1,8 @@
 <%= turbo_frame_tag :pagination do %>
-  <%= render post_view_models %>
-  
+  <% post_view_models.each do |post| %>
+    <%= render partial: "posts/post", locals: { post: post } %>
+  <% end %>
+
   <% if pagy.next %>
     <%= turbo_frame_tag :pagination, 
         src: posts_path(page: pagy.next),

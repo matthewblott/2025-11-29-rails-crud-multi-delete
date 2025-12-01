@@ -1,9 +1,0 @@
-<h1>Editing Post</h1>
-
-<controls>
-  <%= button_tag :Update, form: :post_form, formaction: post_path(@post), method: :patch, data: { turbo: false } %>
-  <%= link_to :Back, post_path(@post) %>
-</controls>
-
-<%= render "form", post: @post, disabled: false %>
-

@@ -1,14 +1,39 @@
+<h1>Posts</h1>
+
 <%= turbo_stream_from :posts_after_create_stream %>
 
-<controls>
-  <%= link_to :New, new_post_path(@post) %>
-</controls>
-
-<hr>
-
 <section id="posts_element">
-  <%= render @posts %>
-  
+  <div data-controller="posts" data-posts-target="controller">
+    <%= button_tag "Select all",
+      data: {
+        action: 'posts#toggleSelection'
+      }
+    %>
+
+  <%= button_tag "Delete",
+    id: "delete-button",
+    type: "submit",
+    data: {
+      action: "posts#bulkDelete",
+      posts_target: "deleteButton"
+    },
+    form: "delete-form" %>
+
+    <%= link_to :New, new_post_path(@post) %>
+
+    <%= form_with url: posts_path,
+      method: :delete,
+      data: {
+        posts_target: 'deleteForm'
+      },
+      id: "delete-form" do |f| %>
+    <% end %>
+
+    <% @posts.each do |post| %>
+      <%= render partial: "posts/post", locals: { post: post } %>
+    <% end %>
+  </div>
+
   <% if @pagy.next %>
     <%= turbo_frame_tag :pagination, 
         src: posts_path(page: @pagy.next),

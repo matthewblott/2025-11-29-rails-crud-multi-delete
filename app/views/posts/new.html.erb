@@ -1,9 +1,26 @@
 <h1>New Post</h1>
 
 <controls>
-  <%= button_tag "Create", form: :post_form, formaction: posts_path(@post) %>
+  <%= button_tag "Create",
+    form: :post_form,
+    formaction: posts_path(@post),
+    data: { turbo: false }
+  %>
   <%= link_to "Back", posts_path, role: "button" %>
 </controls>
 
-<%= render "form", disabled: false %>
+<%= form_with(model: @post, id: :post_form) do |form| %>
 
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body, style: "display: block" %>
+    <%= form.text_area :body %>
+  </div>
+
+  </fieldset>
+
+<% end %>
