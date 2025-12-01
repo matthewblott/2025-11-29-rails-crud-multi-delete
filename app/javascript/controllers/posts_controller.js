@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   
-  static targets = ['controller', 'deleteForm', 'deleteButton']
+  static targets = ['deleteForm', 'deleteButton']
 
   connect() {
     this.ids = []
@@ -18,7 +18,7 @@ export default class extends Controller {
   }
 
   toggleSelection(e) {
-    const posts = this.controllerTarget.querySelectorAll('div[id^="post_"]')
+    const posts = this.element.querySelectorAll('div[id^="post_"]')
     const target = e.currentTarget
 
     this.ids = []    
