@@ -3,20 +3,21 @@
 <%= turbo_stream_from :posts_after_create_stream %>
 
 <section id="posts_element">
-  <div data-controller="posts" data-posts-target="controller">
+  <div data-controller="posts">
+
     <%= button_tag "Select all",
       data: {
+        controller: "select-all",
         action: 'posts#toggleSelection'
       }
     %>
 
     <%= button_tag "Delete",
-      id: "delete-button",
-      type: "submit",
       data: {
-        action: "posts#bulkDelete",
-        posts_target: "deleteButton"
+        controller: "delete-button",
+        action: "posts:enable@window->delete-button#enable delete-button#bulkDelete"
       },
+      disabled: true,
       form: "delete-form"
     %>
 
@@ -25,7 +26,12 @@
     <%= form_with url: posts_path,
       method: :delete,
       data: {
-        posts_target: 'deleteForm'
+        controller: 'delete-form',
+        action: "
+          posts:addField@window->delete-form#addField
+          posts:removeField@window->delete-form#removeField
+          delete-button:submit@window->delete-form#submit
+        "
       },
       id: "delete-form" do |f| %>
     <% end %>
