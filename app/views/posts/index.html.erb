@@ -13,8 +13,8 @@
   data: {
     controller: "ui--delete-button",
     action: "
-      ui--delete-form:updated@window->ui--delete-button#update
       ui--delete-button#submit
+      ui--delete-form:updated@window->ui--delete-button#update
       ui--items:updated@window->ui--delete-button#update
     "
   },
@@ -40,8 +40,8 @@
   <div
     data-controller="ui--items"
     data-action="
-      ui--toggle-selection:toggle@window->ui--items#toggle
       ui--items#toggle
+      ui--toggle-selection:toggle@window->ui--items#toggle
     "
   >
     <% @posts.each do |post| %>
