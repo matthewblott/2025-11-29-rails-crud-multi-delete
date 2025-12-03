@@ -1,12 +1,12 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  bulkDelete(e) {
+  submit(e) {
     e.preventDefault()
     this.dispatch("submit")
   }
 
-  enable({ detail }) {
-    this.element.disabled = !detail
+  update({ detail }) {
+    this.element.disabled = detail.length === 0
   }
 }

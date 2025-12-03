@@ -2,40 +2,51 @@
 
 <%= turbo_stream_from :posts_after_create_stream %>
 
-<section id="posts_element">
-  <div data-controller="posts">
+<%= button_tag "Select all",
+  data: {
+    controller: "ui--toggle-selection",
+    action: "ui--toggle-selection#toggle"
+  }
+%>
 
-    <%= button_tag "Select all",
-      data: {
-        controller: "select-all",
-        action: 'posts#toggleSelection'
-      }
-    %>
+<%= button_tag "Delete",
+  data: {
+    controller: "ui--delete-button",
+    action: "
+      ui--delete-form:updated@window->ui--delete-button#update
+      ui--delete-button#submit
+      ui--items:updated@window->ui--delete-button#update
+    "
+  },
+  disabled: true,
+  form: "ui--delete-form"
+%>
 
-    <%= button_tag "Delete",
-      data: {
-        controller: "delete-button",
-        action: "posts:enable@window->delete-button#enable delete-button#bulkDelete"
-      },
-      disabled: true,
-      form: "delete-form"
-    %>
+<%= link_to :New, new_post_path(@post) %>
 
-    <%= link_to :New, new_post_path(@post) %>
+<%= form_with url: posts_path,
+  method: :delete,
+  data: {
+    controller: 'ui--delete-form',
+    action: "
+      posts:addField@window->ui--delete-form#addField
+      posts:removeField@window->ui--delete-form#removeField
 
-    <%= form_with url: posts_path,
-      method: :delete,
-      data: {
-        controller: 'delete-form',
-        action: "
-          posts:addField@window->delete-form#addField
-          posts:removeField@window->delete-form#removeField
-          delete-button:submit@window->delete-form#submit
-        "
-      },
-      id: "delete-form" do |f| %>
-    <% end %>
+      ui--delete-button:submit@window->ui--delete-form#submit
+      ui--items:updated@window->ui--delete-form#update
+    "
+  },
+  id: "ui--delete-form" do |f| %>
+<% end %>
 
+<section id="posts_element" data-controller="posts-x">
+  <div
+    data-controller="ui--items"
+    data-action="
+      ui--toggle-selection:toggle@window->ui--items#toggle
+      ui--items#toggle
+    "
+  >
     <% @posts.each do |post| %>
       <%= render partial: "posts/post", locals: { post: post } %>
     <% end %>
