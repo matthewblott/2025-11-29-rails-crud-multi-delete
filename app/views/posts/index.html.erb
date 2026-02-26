@@ -19,7 +19,7 @@
     "
   },
   disabled: true,
-  form: "ui--delete-form"
+  form: "delete-form"
 %>
 
 <%= link_to :New, new_post_path(@post) %>
@@ -33,10 +33,10 @@
       ui--items:updated@window->ui--delete-form#update
     "
   },
-  id: "ui--delete-form" do |f| %>
+  id: "delete-form" do |f| %>
 <% end %>
 
-<section id="posts_element" data-controller="posts-x">
+<section id="posts_element">
   <div
     data-controller="ui--items"
     data-action="
